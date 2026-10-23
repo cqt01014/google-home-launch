@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f7fc">
+  <title>Google Homeを開く</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:24px;background:#f4f7fc;color:#202124;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.8}main{width:100%;max-width:440px;padding:36px 24px;background:#fff;border-radius:24px;box-shadow:0 10px 40px #2030500c}h1{font-size:25px;line-height:1.4;margin:0 0 20px}.button{display:block;text-align:center;background:#1967d2;color:white;text-decoration:none;padding:15px 12px;border-radius:12px;font-weight:700;margin:24px 0}p{font-size:15px}.hint{font-size:13px;color:#5f6368}details{margin-top:24px}summary{cursor:pointer}a{color:#1967d2}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Google Homeを開く</h1>
+    <p id="status" role="status">アプリの起動を試みます。開かない場合は、下のボタンを押してください。</p>
+    <a class="button" id="open" href="googlehome://">Google Homeを開く</a>
+    <p class="hint">確認が表示された場合は「開く」を選んでください。</p>
+    <details>
+      <summary>開かない場合</summary>
+      <p>LINE内のブラウザで開いている場合は、メニューからSafariなどの外部ブラウザでこのページを開き、もう一度ボタンを押してください。</p>
+      <p>Google Homeがインストールされていることをご確認ください。</p>
+      <p><a href="https://apps.apple.com/jp/app/google-home/id680819774">App StoreでGoogle Homeを見る</a></p>
+      <p class="hint">このページの起動リンクがお使いのアプリで対応していない場合は、Google Homeのアイコンから開いてください。</p>
+    </details>
+  </main>
+  <script>
+    // This root scheme is a test candidate, not a verified Google Home home-screen route.
+    // Attempt once on initial load; never retry automatically or on return from the app.
+    const appUrl = 'googlehome://';
+    const openLink = document.getElementById('open');
+    const status = document.getElementById('status');
+    openLink.href = appUrl;
+    openLink.addEventListener('click', () => {
+      status.textContent = 'アプリが開かない場合は、下の「開かない場合」をご確認ください。';
+    });
+    window.addEventListener('load', () => {
+      if (/iPhone|iPad|iPod/.test(navigator.userAgent) && document.visibilityState === 'visible') {
+        window.location.href = appUrl;
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>
+
