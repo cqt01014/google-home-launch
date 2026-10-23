@@ -20,7 +20,17 @@
       <p>Google Homeがインストールされていることをご確認ください。</p>
       <p>LINE内で開かない場合は、メニューからChromeやSafariでこのページを開き、もう一度ボタンを押してください。</p>
     </details>
-    <p class="hint">更新版 v3</p>
+    <p class="hint">更新版 v4</p>
   </main>
+  <script>
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isIOS) {
+      const button = document.getElementById('open');
+      button.href = 'googlehome://';
+      button.textContent = 'Google Homeを開く（iPhone用）';
+      document.querySelector('main > p').textContent = 'iPhone向け起動リンクのテストです。下のボタンを押してください。';
+    }
+  </script>
 </body>
 </html>
